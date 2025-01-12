@@ -1,4 +1,4 @@
-name: Dockerize and Push
+name: Build and Push Docker Image
 
 on:
   push:
@@ -9,13 +9,13 @@ on:
       - master
 
 jobs:
-  build-and-push:
+  build:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-
+    
     - name: Build Docker image
       run: |
         docker build -t ${{ secrets.DOCKER_USERNAME }}/playermap:latest .
@@ -27,4 +27,3 @@ jobs:
 
     - name: Push Docker image
       run: docker push ${{ secrets.DOCKER_USERNAME }}/azerothcore-armory:latest
-
